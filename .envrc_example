@@ -1,0 +1,7 @@
+export AWS_SECRET_ACCESS_KEY=
+export AWS_ACCESS_KEY_ID=
+export AWS_DEFAULT_REGION=
+export AWS_REGION=              # AWS 리전. 예: us-west-2, us-east-1, ap-northeast-1 등
+export AWS_ACCOUNT_ID=       # AWS 계정 ID. 12자리 숫자
+export ECR_REPOSITORY_NAME=   # ECR 저장소 이름. 예: my-lambda-proxy
+export LAMBDA_FUNCTION_NAME= # Lambda 함수 이름. 예: MyLambdaProxyFunction
