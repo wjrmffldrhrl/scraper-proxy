@@ -1,16 +1,44 @@
-# This is a sample Python script.
+import json
+from app.lambda_function import lambda_handler
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# 예시 데이터
+get_event = {
+    "httpMethod": "GET",
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "queryStringParameters": {
+        "url": "https://www.youtube.com/watch?v=zx1FH6l1ZIM"
+    },
+    "body": None  # GET 요청의 경우 필요 없는 경우에 None을 할당
+}
+
+# post_event = {
+#     "httpMethod": "POST",
+#     "headers": {
+#         "Content-Type": "application/json"
+#     },
+#     "queryStringParameters": {
+#         "url": "https://example.com"
+#     },
+#     "body": json.dumps({"key": "value"})
+# }
+
+# 빈 컨텍스트 객체 (Test 용도)
+context = {}
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+def main():
+    # GET 요청 테스트
+    print("Testing GET request:")
+    response = lambda_handler(get_event, context)
+    print(json.dumps(response, indent=4))
+
+    # # POST 요청 테스트
+    # print("Testing POST request:")
+    # response = lambda_handler(post_event, context)
+    # print(json.dumps(response, indent=4))
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()

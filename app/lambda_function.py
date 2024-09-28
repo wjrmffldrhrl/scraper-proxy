@@ -3,10 +3,20 @@ import requests
 from requests.exceptions import RequestException
 
 def lambda_handler(event, context):
+    print('event', event)
+    print('context', context)
+
     method = event['httpMethod']
     headers = event['headers']
     body = event['body']
     target_url = event['queryStringParameters'].get('url')
+
+    custom_headers = {
+        key[9:]: value
+        for key, value in headers.items()
+        if key.startswith("x-custom-")
+    }
+    print("custom_headers", custom_headers)
 
     if not target_url:
         return {
@@ -17,9 +27,9 @@ def lambda_handler(event, context):
 
     try:
         if method == 'GET':
-            response = requests.get(target_url, headers=headers)
+            response = requests.get(target_url, headers=custom_headers)
         elif method == 'POST':
-            response = requests.post(target_url, headers=headers, data=body)
+            response = requests.post(target_url, headers=custom_headers, data=body)
         else:
             return {
                 'statusCode': 405,
